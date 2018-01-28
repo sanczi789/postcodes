@@ -1,0 +1,13 @@
+<h1>Find the delivery office</h1>
+
+<%= link_to "Add a delivery office", new_office_path, class: "new-office" %>
+
+<% @offices.each do |office| %>
+  <div>
+    <%= office.name %>
+    <%= office.postcode %>
+    <% coords = Geokit::Geocoders::GoogleGeocoder.geocode(office.postcode) %>
+    <%= coords.lat %>
+    <%= coords.lng %>
+  </div>
+<% end %>

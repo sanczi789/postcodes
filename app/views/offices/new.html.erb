@@ -1,0 +1,9 @@
+<h1>Add a new office</h1>
+
+<div class="form">
+  <%= simple_form_for [@office] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :postcode %>
+    <%= f.submit "Submit your cocktail", class: "btn btn-primary" %>
+  <% end %>
+</div>
