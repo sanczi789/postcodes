@@ -2,7 +2,8 @@
   "name": "postcodes",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.1"
+    "@rails/webpacker": "^3.2.1",
+    "gmaps": "^0.4.24"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.11.1"
