@@ -1,13 +1,42 @@
-<h1>Find the delivery office</h1>
-
-<%= link_to "Add a delivery office", new_office_path, class: "new-office" %>
-
-<% @offices.each do |office| %>
-  <div>
-    <%= office.name %>
-    <%= office.postcode %>
-    <% coords = Geokit::Geocoders::GoogleGeocoder.geocode(office.postcode) %>
-    <%= coords.lat %>
-    <%= coords.lng %>
+<div class="navbar">
+  <div class="logo">
+    <%= image_tag "noun-map.png", height: 90 %>
+    <h1>Find your delivery office</h1>
   </div>
-<% end %>
+
+  <div class="right-navbar">
+    <%= link_to "Add a delivery office", new_office_path, class: "new-office" %>
+    <%= link_to "All offices", root_path, class: "new-office" %>
+  </div>
+</div>
+
+<form action="/" method="get">
+  <input required type="text" name="postcode" class="search-query form-control" placeholder="Postcode" >
+    <input required type="text" name="radius" class="search-query form-control" placeholder="Radius [km]" >
+  <input type="submit" class="btn btn-danger" id="search-btn" value = "Search">
+</form>
+<div class="list-offices">
+  <% selected_offices = [] %>
+  <% if params[:postcode].present? %>
+    <% @offices.each do |office| %>
+      <% office_coords = [office.longitude, office.latitude] %>
+      <% distance = distance(@search_coords, office_coords) %>
+      <% if distance <= params[:radius].to_f %>
+        <% selected_offices << office %>
+      <% end %>
+    <% end %>
+    Search result for <%= params[:postcode] %> postcode in <%= params[:radius] %> km radius:
+    <% selected_offices.each do |office| %>
+      <%= office.name %>
+      <%= office.postcode %>
+      <% office_coords = [office.longitude, office.latitude] %>
+      <%= distance = distance(@search_coords, office_coords) %> km
+    <% end %>
+  <% else %>
+    All offices:
+    <% @offices.each do |office| %>
+      <%= office.name %>
+      <%= office.postcode %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,9 +1,18 @@
-<h1>Add a new office</h1>
+<div class="navbar">
+  <div class="logo">
+    <%= image_tag "noun-map.png", height: 90 %>
+    <h1>Add a new office</h1>
+  </div>
+
+  <div class="right-navbar">
+    <%= link_to "Back to list", root_path, class: "new-office" %>
+  </div>
+</div>
 
 <div class="form">
   <%= simple_form_for [@office] do |f| %>
     <%= f.input :name %>
     <%= f.input :postcode %>
-    <%= f.submit "Submit your cocktail", class: "btn btn-primary" %>
+    <%= f.submit "Submit your office", class: "btn btn-primary" %>
   <% end %>
 </div>
