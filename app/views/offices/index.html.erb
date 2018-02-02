@@ -6,37 +6,55 @@
 
   <div class="right-navbar">
     <%= link_to "Add a delivery office", new_office_path, class: "new-office" %>
-    <%= link_to "All offices", root_path, class: "new-office" %>
   </div>
 </div>
+<div class="container">
+  <form action="/" method="get" class="form-inline">
+    <div class="form-group">
+      <input required type="text" name="postcode" class="search-query form-control" placeholder="Postcode" >
+    </div>
+    <div class="form-group">
+      <input required type="text" name="radius" class="search-query form-control" placeholder="Radius [km]" >
+    </div>
+    <input type="submit" class="btn btn-danger" id="search-btn" value = "Search">
+  </form>
 
-<form action="/" method="get">
-  <input required type="text" name="postcode" class="search-query form-control" placeholder="Postcode" >
-    <input required type="text" name="radius" class="search-query form-control" placeholder="Radius [km]" >
-  <input type="submit" class="btn btn-danger" id="search-btn" value = "Search">
-</form>
-<div class="list-offices">
-  <% selected_offices = [] %>
-  <% if params[:postcode].present? %>
-    <% @offices.each do |office| %>
-      <% office_coords = [office.longitude, office.latitude] %>
-      <% distance = distance(@search_coords, office_coords) %>
-      <% if distance <= params[:radius].to_f %>
-        <% selected_offices << office %>
+  <div class="list-offices">
+    <% if params[:postcode].present? %>
+      <% if @offices == [] %>
+        <p>Sorry no results, try increasing the radius!</p>
+      <% else %>
+        <h2>Search result for <%= params[:postcode] %> postcode in <%= params[:radius] %> miles radius:</h2>
+        <div>
+          <i class="fa fa-undo" aria-hidden="true"></i>
+          <%= link_to "Back to all offices", root_path, class: "new-office" %>
+        </div>
+        <% sorted_offices = @offices.sort_by { |k| k[:distance] } %>
+        <% sorted_offices.each do |office| %>
+          <div class="office">
+            <h3><%= office[:office].name.capitalize %></h3>
+            <%= office[:office].postcode.upcase %>
+            <%= office[:distance] %> mi
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <h2>All offices:</h2>
+      <% @offices.each do |office| %>
+        <div class="office">
+          <h3><%= office.name.capitalize %></h3>
+          <%= office.postcode.upcase %>
+        </div>
       <% end %>
     <% end %>
-    Search result for <%= params[:postcode] %> postcode in <%= params[:radius] %> km radius:
-    <% selected_offices.each do |office| %>
-      <%= office.name %>
-      <%= office.postcode %>
-      <% office_coords = [office.longitude, office.latitude] %>
-      <%= distance = distance(@search_coords, office_coords) %> km
-    <% end %>
-  <% else %>
-    All offices:
-    <% @offices.each do |office| %>
-      <%= office.name %>
-      <%= office.postcode %>
-    <% end %>
-  <% end %>
+  </div>
+  <div
+  id="map"
+  style="width: 100%;
+  height: 600px;"
+  data-markers="<%= @markers.to_json %>"
+></div>
 </div>
+
+
+
