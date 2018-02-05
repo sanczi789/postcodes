@@ -1,45 +1,33 @@
 <div class="navbar">
-  <div class="logo">
-    <%= image_tag "noun-map.png", height: 90 %>
+  <div class="left-navbar">
+    <a href="/" class="navbar-logo">
+      <%= image_tag "noun-map.png", class: "logo" %>
+    </a>
     <h1>Add a new office</h1>
   </div>
-
-  <div class="right-navbar">
-    <%= link_to "Back to list", root_path, class: "new-office" %>
+  <div>
+    <i class="fa fa-undo" aria-hidden="true"></i>
+    <%= link_to "Back to list", root_path, class: "link" %>
   </div>
 </div>
-<div class="form-background" style="height: 100vh; background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.4) 1%), url('https://images.unsplash.com/photo-1467809941367-bbf259d44dd6?auto=format&fit=crop&w=2380&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');">
-  <div class="container">
-    <%= simple_form_for [@office] do |f| %>
-      <div class="form-window">
-        <div class="form-group">
-          <!-- <div class="row"> -->
-            <!-- <div class="col-sm-6 col-sm-offset-3 col-xs-12"> -->
-              <div class="field">
-                <%= f.input :name, class: 'my-label' %>
-              </div>
-            <!-- </div> -->
-          <!-- </div> -->
-        </div>
-        <div class="form-group">
-          <!-- <div class="row"> -->
-            <!-- <div class="col-sm-6 col-sm-offset-3 col-xs-12"> -->
-              <div class="field">
-                <%= f.input :postcode, label: "Postcode (no spaces)" %>
-              </div>
-            <!-- </div> -->
-          <!-- </div> -->
-        </div>
-        <div class="actions">
-          <!-- <div class="row"> -->
-            <!-- <div class="col-sm-6 col-sm-offset-3 col-xs-12"> -->
-              <%= f.submit "Submit your office", class: "btn btn-primary" %>
-            <!-- </div> -->
-          <!-- </div> -->
+<div class="container">
+  <%= simple_form_for [@office] do |f| %>
+    <div class="form-window">
+      <div class="form-group">
+        <div class="field">
+          <%= f.input :name, class: 'my-label' %>
         </div>
       </div>
+      <div class="form-group">
+        <div class="field">
+          <%= f.input :postcode, label: "Postcode (no spaces)" %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "Submit your office", class: "btn btn-danger" %>
+      </div>
+    </div>
 
-    <% end %>
-  </div>
+  <% end %>
 </div>
 

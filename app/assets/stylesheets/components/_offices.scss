@@ -1,0 +1,21 @@
+.office {
+  padding: 7px 12px;
+  background-color: white;
+  // border: solid #999999 1px;
+  border-radius: 5px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.my-label {
+  margin-bottom: 0px !important;
+}
+.form-window {
+  background-color: white;
+  opacity: 0.8;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}

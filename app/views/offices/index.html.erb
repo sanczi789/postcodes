@@ -1,11 +1,13 @@
 <div class="navbar">
-  <div class="logo">
-    <%= image_tag "noun-map.png", height: 90 %>
+  <div class="left-navbar">
+    <a href="/" class="navbar-logo">
+      <%= image_tag "noun-map.png", class: "logo" %>
+    </a>
     <h1>Find your delivery office</h1>
   </div>
-
-  <div class="right-navbar">
-    <%= link_to "Add a delivery office", new_office_path, class: "new-office" %>
+  <div>
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    <%= link_to "Add office", new_office_path, class: "link" %>
   </div>
 </div>
 <div class="container">
@@ -14,7 +16,7 @@
       <input required type="text" name="postcode" class="search-query form-control" placeholder="Postcode" >
     </div>
     <div class="form-group">
-      <input required type="text" name="radius" class="search-query form-control" placeholder="Radius [km]" >
+      <input required type="text" name="radius" class="search-query form-control" placeholder="Radius [mi]" >
     </div>
     <input type="submit" class="btn btn-danger" id="search-btn" value = "Search">
   </form>
@@ -24,17 +26,19 @@
       <% if @offices == [] %>
         <p>Sorry no results, try increasing the radius!</p>
       <% else %>
-        <h2>Search result for <%= params[:postcode] %> postcode in <%= params[:radius] %> miles radius:</h2>
+        <h2>Search result for <strong><%= params[:postcode] %></strong> postcode in <strong><%= params[:radius] %></strong> miles radius:</h2>
         <div>
           <i class="fa fa-undo" aria-hidden="true"></i>
-          <%= link_to "Back to all offices", root_path, class: "new-office" %>
+          <%= link_to "Reset", root_path, class: "link" %>
         </div>
         <% sorted_offices = @offices.sort_by { |k| k[:distance] } %>
         <% sorted_offices.each do |office| %>
           <div class="office">
-            <h3><%= office[:office].name.capitalize %></h3>
-            <%= office[:office].postcode.upcase %>
-            <%= office[:distance] %> mi
+            <div>
+              <h3><%= office[:office].name.capitalize %></h3>
+              <p><%= office[:office].postcode.upcase %></p>
+            </div>
+            <p><%= office[:distance] %> mi</p>
           </div>
         <% end %>
       <% end %>
@@ -42,8 +46,10 @@
       <h2>All offices:</h2>
       <% @offices.each do |office| %>
         <div class="office">
-          <h3><%= office.name.capitalize %></h3>
-          <%= office.postcode.upcase %>
+          <div>
+            <h3><%= office.name.capitalize %></h3>
+            <p><%= office.postcode.upcase %></p>
+          </div>
         </div>
       <% end %>
     <% end %>
