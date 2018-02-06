@@ -24,7 +24,11 @@
   <div class="list-offices">
     <% if params[:postcode].present? %>
       <% if @offices == [] %>
-        <p>Sorry no results, try increasing the radius!</p>
+        <h2>Sorry no results, try increasing the radius!</h2>
+        <div>
+          <i class="fa fa-undo" aria-hidden="true"></i>
+          <%= link_to "Reset", root_path, class: "link" %>
+        </div>
       <% else %>
         <h2>Search result for <strong><%= params[:postcode] %></strong> postcode in <strong><%= params[:radius] %></strong> miles radius:</h2>
         <div>

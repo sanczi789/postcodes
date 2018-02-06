@@ -1,9 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  postcode: MyString
+cambridge:
+  name: "cambridge"
+  postcode: "cb41pw"
+  latitude: 52.2208344
+  longitude: 0.1364725
 
-two:
-  name: MyString
-  postcode: MyString
+whitechapel:
+  name: "whitechapel"
+  postcode: "e15pt"
+  latitude: 51.5218384
+  longitude: -0.0584887
+
+brixton:
+  name: "brixton"
+  postcode: "sw21rj"
+  latitude: 51.4598359
+  longitude: -0.1170324
